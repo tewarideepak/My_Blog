@@ -1,0 +1,9 @@
+
+<% @article.errors.full_messages_for(:title).each do |msg|%>
+    <div><%= msg %></div>
+<% end %>
+
+<% @article.errors.full_messages_for(:description).each do |msg|%>
+    <div><%= msg %></div>
+<% end %>
+
