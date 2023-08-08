@@ -6,10 +6,31 @@ class CommentsController < ApplicationController
     end
 
     def create
-        @article=Article.find(params[:article_id])
-        @comment=@article.comments.create(comment_params)
-        redirect_to @article
+        # @article=Article.find(params[:article_id])
+        # @comment=@article.comments.create(comment_params)
+        # @comment.author=User.last
+        @article = Article.find(params[:article_id])
+        @comment = @article.comments.new(comment_params)
+        @comment.author = User.last
+        if @comment.save
+            redirect_to article_path(@article), notice: 'Comment was successfully created.'
+        else
+            render 'new'
+        end
     end
+
+    # def create
+    #     @article = Article.find(params[:article_id])
+    #     @comment = @article.comments.build(comment_params)
+      
+    #     if @comment.save
+    #       redirect_to article_path(@article), notice: 'Comment was successfully created.'
+    #     else
+    #       flash.now[:alert] = 'Comment could not be created.'
+    #       render 'new'
+    #     end
+    #   end
+      
 
     def destroy
         @article=Article.find(params[:article_id])
