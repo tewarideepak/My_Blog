@@ -2,7 +2,7 @@
 <h1 class="text-center">Latest on Alpha</h1>
 
 <%= image_tag current_user.image.url, class: "resize-image" if current_user.image.present?  %>
-
+<%= will_paginate @articles %>
 <div class="container">
     <% @articles.each do |article| %>
         <div class="row justify-content-md-center">
