@@ -41,6 +41,10 @@ class ArticlesController < ApplicationController
       @article.destroy
       redirect_to user_articles_path(current_user)
     end
+
+    def articles_with_comments
+        @articles_with_comments = Article.includes(:comments).order('articles.created_at DESC')
+    end
   
     private
   
@@ -49,7 +53,7 @@ class ArticlesController < ApplicationController
     end
   
     def article_params
-      params.require(:article).permit(:title, :description)
+      params.require(:article).permit(:image, :title, :description)
     end
   end
   

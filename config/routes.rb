@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
   root 'pages#home'
   get 'about', to: 'pages#about'
+  get 'articles_with_comments', to: 'articles#articles_with_comments'
 end

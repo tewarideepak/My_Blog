@@ -46,3 +46,8 @@ body {
 #sticky-footer {
   flex-shrink: none;
 }
+
+.resize-image{
+  width: 400px;
+  height: auto;
+}

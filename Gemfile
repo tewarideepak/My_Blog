@@ -10,6 +10,7 @@ gem "rails", "~> 7.0.6"
 gem 'devise'
 gem 'pry'
 gem 'pry-rails'
+gem 'carrierwave'
 # gem 'pry-remote'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
