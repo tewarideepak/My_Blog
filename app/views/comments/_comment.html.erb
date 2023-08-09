@@ -2,7 +2,7 @@
 <% @article.comments.each do |c| %>
     <p>
         <strong>Commenter:</strong>
-        <%= c.commenter%>
+        <%= c.author.username %>
     </p>
 
     <p>
@@ -11,6 +11,6 @@
     </p>
 
     <p>
-        <%= link_to 'Delete',[c.article,c],data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}%>
+        <%= link_to 'Delete',[c.author,c.article,c],data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}%>
     </p>
 <% end %>

@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
         @comment = @article.comments.new(comment_params)
         @comment.author = User.last
         if @comment.save
-            redirect_to article_path(@article), notice: 'Comment was successfully created.'
+            redirect_to user_article_path(@article.author,@article), notice: 'Comment was successfully created.'
         else
             render 'new'
         end
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
         @article=Article.find(params[:article_id])
         @comment=@article.comments.find(params[:id])
         @comment.destroy
-        redirect_to article_path(@article)
+        redirect_to user_article_path(@comment.author,@article)
     end
 
 

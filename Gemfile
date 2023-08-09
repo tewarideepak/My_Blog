@@ -9,6 +9,8 @@ gem "rails", "~> 7.0.6"
 #Devise gem installed
 gem 'devise'
 gem 'pry'
+gem 'pry-rails'
+# gem 'pry-remote'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

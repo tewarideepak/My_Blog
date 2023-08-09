@@ -6,19 +6,22 @@
             <div class="col-8 mt-4">
                 <div class="card text-center shadow mb-5 bg-white rounded">
                 <div class="card-header fst-italic">
-                    by - Deepak Tewari
+                    by - <%= @article.author.username %>
                 </div>
                 <div class="card-body">
                     <div class="card-text"><%= simple_format(@article.description) %></div>
-                    <%= link_to "Comment", new_article_comment_path(@article), class: "btn btn-outline-success"%>
-                    <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info"%>
-                    <%= link_to "Delete", article_path(@article), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
-                    <%= link_to "Return", articles_path, class: "btn btn-outline-secondary"%>
+                    <%= link_to "Comment", new_user_article_comment_path(:author_id,@article), class: "btn btn-outline-success"%>
+                    <%= link_to "Edit", edit_user_article_path(:author_id,@article), class: "btn btn-outline-info"%>
+                    <%= link_to "Delete", user_article_path(:author_id,@article), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+                    <%= link_to "Return", user_articles_path(:author_id), class: "btn btn-outline-secondary"%>
                 </div>
                 <div class="card-footer text-muted">
                     <small>Created <%= time_ago_in_words(@article.created_at) %> ago,
                     edited <%= time_ago_in_words(@article.updated_at) %> ago</small>
-                    <p><%= "#{pluralize(@article.comments.count,'user')} commented on this Article." %></p>
+                    <!--<p><%= "#{pluralize(@article.comments.count,'user')} commented on this Article." %></p>-->
+                    <p><%= pluralize(@article.comments.distinct.count(:author_id), 'user') %> commented on this Article.</p>
+                    <% user_comments_count = current_user.comments.where(article_id: @article.id).count %>
+                    <p><%= "You have added #{user_comments_count} #{'comment'.pluralize(user_comments_count)} on this Article." %></p>
                 </div>
                 </div>
             </div>

@@ -18,8 +18,8 @@
             Articles
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><%= link_to "Create new article", new_article_path, class: "dropdown-item" %></li>
-            <li><%= link_to "View articles", articles_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Create new article", new_user_article_path(:author_id), class: "dropdown-item" %></li>
+            <li><%= link_to "View articles", user_articles_path(:author_id,:article_id), class: "dropdown-item" %></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
