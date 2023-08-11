@@ -2,6 +2,10 @@ class User < ApplicationRecord
   has_many :articles, foreign_key: 'author_id'
   has_many :comments, foreign_key: 'author_id'
   has_many :articles, through: :comments
+  has_one :billing_address, dependent: :destroy
+  has_one :mailing_address, dependent: :destroy
+
+  accepts_nested_attributes_for :billing_address, :mailing_address
 
   mount_uploader :image,ImageUploader
 

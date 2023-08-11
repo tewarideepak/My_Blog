@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations/registrations' }
   resources :users do
     resources :articles do
+      member do
+        post 'like'
+        post 'dislike'
+        delete 'remove_like'
+        delete 'remove_dislike'
+      end
       resources :comments
     end
   end

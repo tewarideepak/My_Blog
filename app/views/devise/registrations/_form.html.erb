@@ -32,6 +32,65 @@
               </div>
 
               <div class="form-group row mt-3">
+                    <%= f.fields_for :billing_address_attributes, resource.build_billing_address do |ba| %>
+                      <div>
+                        <%= ba.label :street%>
+                        <%= ba.text_field :street%>
+                      </div>
+
+                      <div>
+                        <%= ba.label :city%>
+                        <%= ba.text_field :city%>
+                      </div>
+
+                      <div>
+                        <%= ba.label :state%>
+                        <%= ba.text_field :state%>
+                      </div>
+
+                      <div>
+                        <%= ba.label :country%>
+                        <%= ba.text_field :country%>
+                      </div>
+
+                      <div>
+                        <%= ba.label :pincode%>
+                        <%= ba.text_field :pincode%>
+                      </div>
+
+                    <% end %>
+              </div>
+
+              <div class="form-group row mt-3">
+                    <%= f.fields_for :mailing_address_attributes, resource.build_mailing_address do |ma| %>
+                      <div>
+                        <%= ma.label :street%>
+                        <%= ma.text_field :street%>
+                      </div>
+
+                      <div>
+                        <%= ma.label :city%>
+                        <%= ma.text_field :city%>
+                      </div>
+
+                      <div>
+                        <%= ma.label :state%>
+                        <%= ma.text_field :state%>
+                      </div>
+
+                      <div>
+                        <%= ma.label :country%>
+                        <%= ma.text_field :country%>
+                      </div>
+
+                      <div>
+                        <%= ma.label :pincode%>
+                        <%= ma.text_field :pincode%>
+                      </div>
+                    <% end %>
+              </div>
+
+              <div class="form-group row mt-3">
                 <%= f.label :image, class: "col-2 col-form-label text-light" %>
                 <div class="col-10">
                     <%= f.file_field :image, class: "form-control-file" %>

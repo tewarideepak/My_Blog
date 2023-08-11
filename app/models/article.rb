@@ -8,8 +8,4 @@ class Article < ApplicationRecord
     validates :comments_counter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
     mount_uploader :image, ImageUploader
-
-    def update_post_counter
-        author.increment!(:posts_counter)
-    end
 end

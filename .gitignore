@@ -33,3 +33,22 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+
+        /test/models/dislike_test.rb
+        /test/models/disliked_test.rb
+        /test/models/like_dislike_test.rb
+        /test/models/like_test.rb
+        /test/models/liked_test.rb
+        /test/models/likee_test.rb
+                /test/fixtures/user_addresses.yml
+        /test/models/address_test.rb
+                /test/fixtures/dislikeds.yml
+        /test/fixtures/dislikes.yml
+        /test/fixtures/like_dislikes.yml
+        /test/fixtures/likeds.yml
+        /test/fixtures/likees.yml
+        /test/fixtures/likes.yml
+                /test/fixtures/addresses.yml
+                        /db/migrate/20230810122339_add_likes_and_dislikes_count_to_articles.rb
+                                /app/javascript/controllers/like_controller.js
