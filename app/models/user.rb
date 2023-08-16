@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   mount_uploader :image,ImageUploader
 
+  ROLES = %w{admin editor normal_user}  #for adding roles
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -20,6 +22,14 @@ class User < ApplicationRecord
 
   def validate_username_format
     errors.add(:username, 'cannot have special characters other than "_"') if username.present? && username.match(/[^\w]/)
+  end
+
+
+  #Meta programming for creating roles methods
+  ROLES.each do |role_name|
+    define_method "#{role_name}?" do
+      role == role_name
+    end
   end
 
 

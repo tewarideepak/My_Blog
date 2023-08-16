@@ -32,6 +32,13 @@
               </div>
 
               <div class="form-group row mt-3">
+                    <%= f.label :role, class: "col-2 col-form-label text-light" %>
+                    <div class="col-10">
+                        <%= f.select :role, ["admin","editor","normal_user"], class: "form-control shadow rounded" %>
+                    </div>
+              </div>
+
+              <div class="form-group row mt-3">
                     <%= f.fields_for :billing_address_attributes, resource.build_billing_address do |ba| %>
                       <div>
                         <%= ba.label :street%>

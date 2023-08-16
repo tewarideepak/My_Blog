@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :role %><br />
+    <%= f.select :role, ["admin","editor","normal_user"] %>
+  </div>
+
+  <div class="field">
       <%= f.fields_for :billing_address_attributes, resource.build_billing_address do |ba| %>
         <div>
           <%= ba.label :street%>

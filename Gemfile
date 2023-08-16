@@ -12,6 +12,7 @@ gem 'pry'
 gem 'pry-rails'
 gem 'carrierwave'
 gem 'will_paginate'
+gem 'cancancan'
 # gem 'pry-remote'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
