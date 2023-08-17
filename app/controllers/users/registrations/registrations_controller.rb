@@ -10,9 +10,11 @@ class Users::Registrations::RegistrationsController < Devise::RegistrationsContr
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      UserRegistrationService.call(resource)
+    end
+  end
 
   # GET /resource/edit
   # def edit
