@@ -32,5 +32,9 @@ class User < ApplicationRecord
     end
   end
 
+  def subscribed?
+    subscribed
+  end
+
 
 end

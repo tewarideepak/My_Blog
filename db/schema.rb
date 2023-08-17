@@ -10,19 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_044002) do
-  create_table "addresses", force: :cascade do |t|
-    t.string "street"
-    t.string "city"
-    t.string "state"
-    t.integer "pincode"
-    t.string "address_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "addressable_id"
-    t.index ["addressable_id"], name: "index_addresses_on_addressable_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_094125) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -93,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_044002) do
     t.integer "posts_counter", default: 0
     t.string "image"
     t.string "role"
+    t.boolean "subscribed"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

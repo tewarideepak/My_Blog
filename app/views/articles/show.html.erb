@@ -12,7 +12,9 @@
                 </div>
                 <div class="card-body">
                     <div class="card-text"><%= simple_format(@article.description) %></div>
-                    <%= link_to "Comment", new_user_article_comment_path(:author_id,@article), class: "btn btn-outline-success"%>
+                    <% if can? :create, @comment %>
+                        <%= link_to "Comment", new_user_article_comment_path(:author_id,@article), class: "btn btn-outline-success"%>
+                    <% end %>
                     <% if can? :update, @article%>
                         <%= link_to "Edit", edit_user_article_path(:author_id,@article), class: "btn btn-outline-info"%>
                     <% end %>

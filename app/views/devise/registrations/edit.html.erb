@@ -37,6 +37,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :subscribed, "Update to Premium" %><br />
+    <%= f.checkbox :subscribed %>
+  </div>
+
+  <div class="field">
       <%= f.fields_for :billing_address_attributes, resource.build_billing_address do |ba| %>
         <div>
           <%= ba.label :street%>
