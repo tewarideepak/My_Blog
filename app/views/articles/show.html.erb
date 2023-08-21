@@ -22,6 +22,63 @@
                         <%= link_to "Delete", user_article_path(:author_id,@article), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
                     <% end %>
                     <%= link_to "Return", user_articles_path(:author_id), class: "btn btn-outline-secondary"%>
+
+                    <div>
+                    <button id="like-button">Like</button>
+                    <button id="dislike-button">Dislike</button>
+                    <span>Likes: <span id="like-count"><%= @article.likes.count %></span></span>
+                    <span>Dislikes: <span id="dislike-count"><%= @article.dislikes.count %></span></span>
+                    </div>
+
+
+                    <script>
+                    function updateLikesDislikes(response) {
+                        console.log(response);
+                        document.getElementById('like-count').textContent = response.likes;
+                        document.getElementById('dislike-count').textContent = response.dislikes;
+                    }
+
+                    function sendLikeRequest(articleId, userId, csrfToken) {
+                        console.log(articleId, userId);
+                        fetch(`/users/${userId}/articles/${articleId}/like`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken },
+                        credentials: 'same-origin'
+                        })
+                        .then(response => response.json())
+                        .then(response => console.log(response));
+                    }
+
+                    function sendDislikeRequest(articleId, userId, csrfToken) {
+                        fetch(`/users/${userId}/articles/${articleId}/dislike`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken },
+                        credentials: 'same-origin'
+                        })
+                        .then(response => response.json())
+                        .then(updateLikesDislikes);
+                    }
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const likeButton = document.getElementById('like-button');
+                        const dislikeButton = document.getElementById('dislike-button');
+                        const articleId = <%= @article.id %>;
+                        const userId = <%= @user.id %>
+                        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                        console.log(csrfToken);
+
+                        likeButton.addEventListener('click', function() {
+                        sendLikeRequest(articleId, userId, csrfToken);
+                        });
+
+                        dislikeButton.addEventListener('click', function() {
+                        sendDislikeRequest(articleId, userId, csrfToken);
+                        });
+                    });
+                    </script>
+
+
                 </div>
 
 

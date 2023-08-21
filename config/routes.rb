@@ -2,12 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations/registrations' }
   resources :users do
     resources :articles do
-      member do
-        post 'like'
-        post 'dislike'
-        delete 'remove_like'
-        delete 'remove_dislike'
-      end
+      post 'like', to: 'articles#like'
+      post 'dislike', to: 'articles#dislike'
       resources :comments
     end
   end

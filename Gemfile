@@ -13,6 +13,10 @@ gem 'pry-rails'
 gem 'carrierwave'
 gem 'will_paginate'
 gem 'cancancan'
+gem 'delayed_job_active_record'
+gem 'letter_opener', group: :development
+gem 'rspec-rails'
+
 # gem 'pry-remote'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -78,4 +82,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+end
+
+group :development, :test do
+  gem "rspec-rails"
 end

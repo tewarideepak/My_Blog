@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :articles, through: :comments
   has_one :billing_address, dependent: :destroy
   has_one :mailing_address, dependent: :destroy
+  has_many :likes
+  has_many :dislikes
 
   accepts_nested_attributes_for :billing_address, :mailing_address
 
@@ -18,7 +20,6 @@ class User < ApplicationRecord
 
   validates :username, presence: true
   validate :validate_username_format
-  validates :posts_counter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def validate_username_format
     errors.add(:username, 'cannot have special characters other than "_"') if username.present? && username.match(/[^\w]/)
@@ -34,6 +35,14 @@ class User < ApplicationRecord
 
   def subscribed?
     subscribed
+  end
+
+  def liked?(article)
+    likes.exists?(article: article)
+  end
+
+  def disliked?(article)
+    dislikes.exists?(article: article)
   end
 
 

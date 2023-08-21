@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_094125) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_21_054926) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -21,8 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_094125) do
     t.string "image"
     t.integer "likes"
     t.integer "dislikes"
-    t.integer "likes_count"
-    t.integer "dislikes_count"
     t.index ["author_id"], name: "index_articles_on_author_id"
   end
 
@@ -49,12 +47,38 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_094125) do
     t.index ["author_id"], name: "index_comments_on_author_id"
   end
 
-  create_table "images", force: :cascade do |t|
-    t.integer "imageable_id"
-    t.string "imageable_type"
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "dislikes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
+    t.integer "user_id", null: false
+    t.integer "article_id", null: false
+    t.index ["article_id"], name: "index_dislikes_on_article_id"
+    t.index ["user_id"], name: "index_dislikes_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "article_id", null: false
+    t.boolean "liked"
+    t.index ["article_id"], name: "index_likes_on_article_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "mailing_addresses", force: :cascade do |t|
@@ -90,5 +114,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_094125) do
   add_foreign_key "billing_addresses", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users", column: "author_id"
+  add_foreign_key "dislikes", "articles"
+  add_foreign_key "dislikes", "users"
+  add_foreign_key "likes", "articles"
+  add_foreign_key "likes", "users"
   add_foreign_key "mailing_addresses", "users"
 end

@@ -21,5 +21,6 @@ module MyBlog
 
     # Disable the field_with_errors wrapper
   config.action_view.field_error_proc = Proc.new { |html_tag, _instance| html_tag.html_safe }
+  config.active_job.queue_adapter = :delayed_job
   end
 end
